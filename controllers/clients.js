@@ -2,7 +2,7 @@ const Seller = require('../models/Seller');
 
 
 // @desc Buy Car from Clients
-// @route POST /api/sell
+// @route POST api/sell
 // @access Public
 exports.sellCar = async (req, res, next) => {
   try {
