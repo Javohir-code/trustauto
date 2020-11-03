@@ -1,19 +1,19 @@
 const Seller = require('../models/Seller');
 const path = require('path');
-const multer = require('multer');
-const uuid = require('uuid').v4;
+// const multer = require('multer');
+// const uuid = require('uuid').v4;
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads');
-  },
-  filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname);
-    const id = uuid();
-    const filePath = `cars/${id}${ext}`;
-    cb(null, filePath);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads');
+//   },
+//   filename: function (req, file, cb) {
+//     const ext = path.extname(file.originalname);
+//     const id = uuid();
+//     const filePath = `cars/${id}${ext}`;
+//     cb(null, filePath);
+//   },
+// });
 
 exports.upload = multer({ storage });
 
@@ -22,7 +22,7 @@ exports.upload = multer({ storage });
 // @access Public
 exports.sellCar = async (req, res, next) => {
   try {
-    const fileName = req.file != null ? req.file.filename : null;
+    // const fileName = req.file != null ? req.file.Photos : null;
     const seller = new Seller({
       VIN: req.body.VIN,
       CarTrim: req.body.CarTrim,
@@ -39,7 +39,7 @@ exports.sellCar = async (req, res, next) => {
       emailAddress: req.body.emailAddress,
       phoneNumber: req.body.phoneNumber,
       postCode: req.body.postCode,
-      Photos: fileName,
+      Photos: req.file.Photos,
       message: req.body.message,
     });
 

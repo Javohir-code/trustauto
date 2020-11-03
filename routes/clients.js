@@ -1,15 +1,8 @@
 const express = require('express');
 const multer = require('multer');
-const { sellCar, upload } = require('../controllers/clients');
+const { sellCar } = require('../controllers/clients');
 const router = express.Router();
 
-
-router.route('/api/sell').post(upload.array('Photos'), sellCar);
-
+router.route('/api/sell').post(sellCar);
 
 module.exports = router;
-
-
-
-
-
