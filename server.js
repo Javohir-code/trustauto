@@ -4,13 +4,13 @@ const connectDB = require('./controllers/db');
 const path = require('path');
 const cors = require('cors');
 
-
 dotenv.config({ path: './config/config.env' });
 
 connectDB();
 
 const app = express();
 
+app.use(express.static('uploads'));
 app.use(cors());
 app.use(express.json());
 

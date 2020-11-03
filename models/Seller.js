@@ -64,6 +64,9 @@ const sellerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  Photos: {
+    type: String,
+  },
   message: {
     type: String,
   },
