@@ -4,35 +4,35 @@ const sellerSchema = new mongoose.Schema({
   VIN: {
     type: String,
     trim: true,
-    required: true,
+    // required: true,
   },
   CarTrim: {
     type: String,
-    required: true,
+    // required: true,
   },
   carModel: {
     type: String,
-    required: true,
+    // required: true,
   },
   carMileage: {
     type: String,
-    required: true,
+    // required: true,
   },
   carColor: {
     type: String,
-    required: true,
+    // required: true,
   },
   key: {
     type: String,
-    required: true,
+    // required: true,
   },
   VehicleCondition: {
     type: String,
-    required: true,
+    // required: true,
   },
   transmision: {
     type: String,
-    required: true,
+    // required: true,
   },
   SellDate: {
     type: String,
@@ -42,30 +42,27 @@ const sellerSchema = new mongoose.Schema({
   },
   FirstName: {
     type: String,
-    required: true,
+    // required: true,
   },
   LastName: {
     type: String,
-    required: true,
+    // required: true,
   },
   emailAddress: {
     type: String,
-    required: true,
+    // required: true,
   },
   phoneNumber: {
     type: String,
-    required: true,
+    // required: true,
   },
   postCode: {
     type: String,
-    required: true,
+    // required: true,
   },
   createdAt: {
     type: Date,
     default: Date.now,
-  },
-  Photos: {
-    type: String,
   },
   message: {
     type: String,

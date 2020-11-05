@@ -10,11 +10,12 @@ connectDB();
 
 const app = express();
 
-app.use(express.static('uploads'));
+// app.use(express.static('uploads'));
 app.use(cors());
 app.use(express.json());
 
 app.use('/', require('./routes/clients'));
+app.use('/admin', require('./routes/admins'));
 
 const PORT = process.env.PORT || 5000;
 
