@@ -40,7 +40,8 @@ exports.sellCar = async (req, res, next) => {
 exports.loginSeller = async (req, res, next) => {
   try {
     const seller = await Seller.findByCredentials(req.body.emailAddress);
-    return res.status(200).send(seller);
+    const token = seller.generateAuthToken();
+    return res.header('x-auth-token', token).send('Logged In');
   } catch (error) {
     return res.status(400).send('Server Error');
   }

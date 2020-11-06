@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const sellerSchema = new mongoose.Schema({
   VIN: {
@@ -76,6 +77,11 @@ sellerSchema.statics.findByCredentials = async (emailAddress) => {
   }
 
   return seller;
+};
+
+sellerSchema.methods.generateAuthToken = () => {
+  const token = jwt.sign({ _id: this._id }, process.env.TOKEN_SECRET);
+  return token;
 };
 
 const Seller = mongoose.model('Seller', sellerSchema);
