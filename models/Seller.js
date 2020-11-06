@@ -69,6 +69,15 @@ const sellerSchema = new mongoose.Schema({
   },
 });
 
-const Seller = mongoose.model('Client', sellerSchema);
+sellerSchema.statics.findByCredentials = async (emailAddress) => {
+  const seller = await Seller.findOne({ emailAddress });
+  if (!seller) {
+    throw new Error('Unable to Login!');
+  }
+
+  return seller;
+};
+
+const Seller = mongoose.model('Seller', sellerSchema);
 
 module.exports = Seller;
