@@ -35,7 +35,7 @@ exports.loginAdmin = async (req, res, next) => {
 
 // @desc Get Seller Information
 // @route GET /admin/seller
-// @access Private
+// @acccess Private
 exports.getSeller = async (req, res, next) => {
   try {
     var count = await Seller.countDocuments();
