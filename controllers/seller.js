@@ -5,6 +5,11 @@ const Seller = require('../models/Seller');
 // @access Public
 exports.sellCar = async (req, res, next) => {
   try {
+    var images = [];
+    for (var i = 0; i < req.files.length; i++) {
+      images.push(req.files[0].location);
+    }
+
     const seller = new Seller({
       VIN: req.body.VIN,
       CarTrim: req.body.CarTrim,
@@ -22,17 +27,17 @@ exports.sellCar = async (req, res, next) => {
       phoneNumber: req.body.phoneNumber,
       postCode: req.body.postCode,
       message: req.body.message,
+      Photos: images,
     });
 
     await seller.save();
 
-    return res.status(201).json({ seller });
+    return res.status(201).json({ seller: seller, images: images });
   } catch (err) {
     console.log(err);
     return res.status(500).send('Server Error');
   }
 };
-
 
 // @desc Seller Login
 // @route POST /login
@@ -45,4 +50,4 @@ exports.loginSeller = async (req, res, next) => {
   } catch (error) {
     return res.status(400).send('Server Error');
   }
-}
+};

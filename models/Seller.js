@@ -68,6 +68,9 @@ const sellerSchema = new mongoose.Schema({
   message: {
     type: String,
   },
+  Photos: {
+    type: Array,
+  }
 });
 
 sellerSchema.statics.findByCredentials = async (emailAddress) => {
