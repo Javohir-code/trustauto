@@ -3,7 +3,7 @@ const Seller = require('../models/Seller');
 
 // @desc Adding Admin
 // @route POST /admin/add-admin
-// @access private
+// @access Private
 exports.addAdmin = async (req, res, next) => {
   try {
     const admin = new Admin(req.body);
@@ -26,9 +26,10 @@ exports.loginAdmin = async (req, res, next) => {
       req.body.email,
       req.body.password
     );
-    return res.status(200).send(admin);
+    const token = admin.generateAuthToken();
+    return res.header('auth-admin', token).send('Logged In');
   } catch (error) {
-    return res.status(400).send(error);
+    return res.status(400).send('Password or email is not valid');
   }
 };
 
