@@ -27,7 +27,7 @@ exports.loginAdmin = async (req, res, next) => {
       req.body.password
     );
     const token = admin.generateAuthToken();
-    return res.header('auth-admin', token).send('Logged In');
+    return res.header('auth-admin', token).send(token);
   } catch (error) {
     return res.status(400).send('Password or email is not valid');
   }

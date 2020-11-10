@@ -46,7 +46,7 @@ exports.loginSeller = async (req, res, next) => {
   try {
     const seller = await Seller.findByCredentials(req.body.emailAddress);
     const token = seller.generateAuthToken();
-    return res.header('x-auth-token', token).send('Logged In');
+    return res.header('x-auth-token', token).send(token);
   } catch (error) {
     return res.status(400).send('Server Error');
   }
