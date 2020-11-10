@@ -45,3 +45,27 @@ exports.getSeller = async (req, res, next) => {
     return res.status(400).send('Server error');
   }
 };
+
+// @desc Get seller informations by Id
+// @route GET /admin/seller/details/:id
+// @access Private
+exports.getSellerById = async (req, res, next) => {
+  try {
+    const seller = await Seller.findById(req.params.id);
+    return res.status(200).send(seller);
+  } catch (error) {
+    return res.status(404).send('Seller info not found with given Id');
+  }
+};
+
+// @desc Delete Seller informations
+// @route GET /admin/seller/delete/:id
+// @access Private
+exports.deleteSeller = async (req, res, next) => {
+  try {
+    const seller = await Seller.findByIdAndRemove(req.params.id);
+    return res.status(200).send(seller);
+  } catch (error) {
+    return res.status(400).send('Server error occured while deleting');
+  }
+};

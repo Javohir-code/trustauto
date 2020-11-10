@@ -51,3 +51,14 @@ exports.loginSeller = async (req, res, next) => {
     return res.status(400).send('Server Error');
   }
 };
+
+// @desc Seller profile
+// @route GET /profile
+// @access private
+exports.sellerProfile = async (req, res, next) => {
+  try{
+       const seller = await Seller.find()
+  }catch(err) {
+    return res.status(400).send('Please authenticate!');
+  }
+}
