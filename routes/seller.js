@@ -4,7 +4,11 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const uuid = require('uuid').v4;
 const path = require('path');
-const { sellCar, loginSeller } = require('../controllers/seller');
+const {
+  sellCar,
+  loginSeller,
+  sellerProfile,
+} = require('../controllers/seller');
 const router = express.Router();
 
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
@@ -26,5 +30,6 @@ const upload = multer({
 
 router.route('/api/sell').post(upload.array('Photos'), sellCar);
 router.route('/login').post(loginSeller);
+router.route('/profile').get(sellerProfile);
 
 module.exports = router;

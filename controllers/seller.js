@@ -53,12 +53,14 @@ exports.loginSeller = async (req, res, next) => {
 };
 
 // @desc Seller profile
-// @route GET /profile
+// @route GET /profile?email=
 // @access private
 exports.sellerProfile = async (req, res, next) => {
-  try{
-       const seller = await Seller.find()
-  }catch(err) {
-    return res.status(400).send('Please authenticate!');
+  try {
+    const sellerEmail = req.query.email;
+    const seller = await Seller.find({ emailAddress: sellerEmail });
+    return res.status(200).json({ length: seller.length, seller: seller });
+  } catch (err) {
+    return res.status(400).send('Please authenticate!', err);
   }
-}
+};
