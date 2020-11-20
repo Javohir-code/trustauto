@@ -59,7 +59,13 @@ exports.sellerProfile = async (req, res, next) => {
   try {
     const sellerEmail = req.query.email;
     const seller = await Seller.find({ emailAddress: sellerEmail });
-    return res.status(200).json({ length: seller.length, seller: seller });
+    return res
+      .status(200)
+      .json({
+        length: seller.length,
+        seller: seller,
+        emailAddress: sellerEmail,
+      });
   } catch (err) {
     return res.status(400).send('Please authenticate!', err);
   }
