@@ -8,6 +8,7 @@ const {
   sellCar,
   loginSeller,
   sellerProfile,
+  detailsForSeller,
 } = require('../controllers/seller');
 const router = express.Router();
 
@@ -31,5 +32,6 @@ const upload = multer({
 router.route('/api/sell').post(upload.array('Photos'), sellCar);
 router.route('/login').post(loginSeller);
 router.route('/profile').get(sellerProfile);
+router.route('/profile/details/:id').get(detailsForSeller);
 
 module.exports = router;
