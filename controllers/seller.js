@@ -7,7 +7,7 @@ exports.sellCar = async (req, res, next) => {
   try {
     var images = [];
     for (var i = 0; i < req.files.length; i++) {
-      images.push(req.files[0].location);
+      images.push(req.files[i].location);
     }
 
     const seller = new Seller({
