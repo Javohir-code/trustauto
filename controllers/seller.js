@@ -6,8 +6,14 @@ const Seller = require('../models/Seller');
 exports.sellCar = async (req, res, next) => {
   try {
     var images = [];
+    var keys = [];
     for (var i = 0; i < req.files.length; i++) {
       images.push(req.files[i].location);
+    }
+
+    for (var i = 0; i < images.length; i++) {
+      var ext = images[i].lastIndexOf('m/');
+      keys.push({ Key: images[i].substr(ext + 2) });
     }
 
     const seller = new Seller({
@@ -28,6 +34,7 @@ exports.sellCar = async (req, res, next) => {
       postCode: req.body.postCode,
       message: req.body.message,
       Photos: images,
+      Keys: keys,
     });
 
     await seller.save();
@@ -79,4 +86,4 @@ exports.detailsForSeller = async (req, res, next) => {
   } catch (error) {
     return res.status(404).send('Information not found with given Id');
   }
-}
+};

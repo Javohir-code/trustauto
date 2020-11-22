@@ -1,5 +1,7 @@
 const Admin = require('../models/Admin');
 const Seller = require('../models/Seller');
+const aws = require('aws-sdk');
+const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 
 // @desc Adding Admin
 // @route POST /admin/add-admin
@@ -64,6 +66,22 @@ exports.getSellerById = async (req, res, next) => {
 exports.deleteSeller = async (req, res, next) => {
   try {
     const seller = await Seller.findByIdAndRemove(req.params.id);
+
+    var options = {
+      Bucket: 'trust-autosales',
+      Delete: {
+        Objects: seller.Keys,
+      },
+    };
+
+    s3.deleteObjects(options, function (err, data) {
+      if (data) {
+        console.log('File successfully deleted');
+      } else {
+        console.log('Check with error message ' + err);
+      }
+    });
+
     return res.status(200).send(seller);
   } catch (error) {
     return res.status(400).send('Server error occured while deleting');
