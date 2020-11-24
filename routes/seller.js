@@ -4,6 +4,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const uuid = require('uuid').v4;
 const path = require('path');
+const authSeller = require('../middlewares/auth-seller');
 const {
   sellCar,
   loginSeller,
@@ -31,7 +32,7 @@ const upload = multer({
 
 router.route('/api/sell').post(upload.array('Photos'), sellCar);
 router.route('/login').post(loginSeller);
-router.route('/profile').get(sellerProfile);
-router.route('/profile/details/:id').get(detailsForSeller);
+router.route('/profile').get(authSeller, sellerProfile);
+router.route('/profile/details/:id').get(authSeller, detailsForSeller);
 
 module.exports = router;
