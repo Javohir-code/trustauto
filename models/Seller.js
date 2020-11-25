@@ -70,6 +70,7 @@ const sellerSchema = new mongoose.Schema({
   },
   Photos: {
     type: Array,
+    required: true,
   },
   Keys: {
     type: Array,

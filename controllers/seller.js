@@ -39,6 +39,8 @@ exports.sellCar = async (req, res, next) => {
 
     await seller.save();
 
+    const seller = await Seller.find({}).sort({ createdAt: -1 });
+
     return res.status(201).json({ seller: seller, images: images });
   } catch (err) {
     console.log(err);

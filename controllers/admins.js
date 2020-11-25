@@ -1,5 +1,6 @@
 const Admin = require('../models/Admin');
 const Seller = require('../models/Seller');
+const _ = require('lodash');
 const aws = require('aws-sdk');
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 
@@ -10,7 +11,7 @@ exports.addAdmin = async (req, res, next) => {
   try {
     const admin = new Admin(req.body);
     await admin.save();
-    return res.status(201).send(admin);
+    return res.status(201).send(_.pick(admin, ['_id', 'name', 'email']));
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).json({ error: 'This email already exists' });
@@ -41,7 +42,7 @@ exports.loginAdmin = async (req, res, next) => {
 exports.getSeller = async (req, res, next) => {
   try {
     var count = await Seller.countDocuments();
-    const seller = await Seller.find({});
+    const seller = await Seller.find({}).sort({ createdAt: -1 });
     return res.status(200).json({ count: count, seller: seller });
   } catch (error) {
     return res.status(400).send('Server error');
