@@ -11,7 +11,7 @@ exports.addAdmin = async (req, res, next) => {
   try {
     const admin = new Admin(req.body);
     await admin.save();
-    return res.status(201).send(_.pick(admin, ['_id', 'name', 'email']));
+    return res.status(201).send(admin);
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).json({ error: 'This email already exists' });
